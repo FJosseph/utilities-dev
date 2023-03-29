@@ -1,4 +1,5 @@
 import { route } from 'quasar/wrappers'
+import { useUserStore } from 'src/stores/user'
 import { createRouter, createMemoryHistory, createWebHistory, createWebHashHistory } from 'vue-router'
 import routes from './routes'
 
@@ -11,7 +12,11 @@ import routes from './routes'
  * with the Router instance.
  */
 
-export default route(function (/* { store, ssrContext } */) {
+export default route(function (/* { store, ssrContext } */ {store}) {
+  store.install
+  const storeUser = useUserStore()
+  console.log(storeUser.isAuthtenticated);
+
   const createHistory = process.env.SERVER
     ? createMemoryHistory
     : (process.env.VUE_ROUTER_MODE === 'history' ? createWebHistory : createWebHashHistory)
@@ -24,6 +29,24 @@ export default route(function (/* { store, ssrContext } */) {
     // quasar.conf.js -> build -> vueRouterMode
     // quasar.conf.js -> build -> publicPath
     history: createHistory(process.env.VUE_ROUTER_BASE)
+  })
+
+  Router.beforeEach((to,from, next)=>{
+    // next()
+    if(to.matched.some(route=>route.meta.requiredAuth)){
+      if(!storeUser.isAuthtenticated){
+        next('/login')
+      }else {
+        next()
+      }
+    } else {
+      // console.log(to);
+      if(to.name === 'Login' && storeUser.isAuthtenticated){
+        next('/')
+      } else {
+        next()     
+      }
+    }
   })
 
   return Router

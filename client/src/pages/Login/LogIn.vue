@@ -6,39 +6,51 @@
         </div>
         <!-- <GoogleSignInButton @params="params" @success="handleLoginSuccess"
         @error="handleLoginError"/> -->
-        <button v-google-signin-button="params.client_id" class="google-signin-button"></button>
     </div>
 </template>
 <script setup>
 import SignIn from 'src/components/login/SignIn.vue';
 import SignUp from 'src/components/login/SignUp.vue';
-import { provide, ref } from 'vue';
-import {GoogleSignInButton, } from "vue3-google-signin"
-
-const  {VUE_ID_CLIENTE}  = process.env
+import { computed, provide, ref, watch, watchEffect } from 'vue';
+import { useRouter } from 'vue-router';
+import { useUserStore } from '../../stores/user';
+// import {GoogleSignInButton, } from "vue3-google-signin"
+const router = useRouter()
+const storeUser = useUserStore()
+const auth = computed(()=>storeUser.isAuthtenticated)
+// const  {VUE_ID_CLIENTE}  = process.env
 // Estado formulario renderización
 const isLogin = ref(true)
 provide('login', isLogin)
 
-// Manejo de login con google
-const params = {
-  client_id: VUE_ID_CLIENTE,
-  ux_mode: 'popup',
-}
+watchEffect(()=>{
+  // Seteamos el usuario en caso esté logueado
+  window.localStorage.getItem('userCredentials') && storeUser.setUser()
+  auth.value && router.push('/')
+})
 
-const handleLoginSuccess = (response) => {
-  const { credential } = response;
-  console.log("Access Token", credential);
-};
+// Manejo de login con google
+// const params = {
+//   client_id: VUE_ID_CLIENTE,
+//   ux_mode: 'popup',
+// }
+
+// const handleLoginSuccess = (response) => {
+  // const { credential } = response;
+  // console.log("Access Token", credential);
+// };
 
 // handle an error event
-const handleLoginError = () => {
-  console.error("Login failed");
-};
+// const handleLoginError = () => {
+  // console.error("Login failed");
+// };
 </script>
 <style>    
 #container-login{
     align-items: center;
+    background-image: url('../../assets/background_form.jpg');
+    background-size: auto;
+    background-repeat: no-repeat;
 }
 
 .form-container{
@@ -46,6 +58,8 @@ const handleLoginError = () => {
     justify-content: center;
     align-items: center;
     width: 30em;
+    background-color: white;
+    border-radius: 10px;
     /* max-width: 40em; */
     min-height: 30em;
     max-height: 52em;

@@ -9,13 +9,26 @@ export const useUserStore = defineStore('user', {
   }),
   getters: {
     getUser: (state) => state.user,
+    isAuthtenticated: (state)=>!!state.user,
   },
   actions: {
+    async setUser(){
+      const token = window.localStorage.getItem('userCredentials')
+      console.log('getUser:', JSON.parse(token));
+      try {
+        const response = await axios.get(`${URL_API}/user`, {headers: {'x-access-token': JSON.parse(token).token}})
+        console.log(response.data);
+        this.user = response.data
+      } catch (error) {
+        console.log(error);
+      }
+    },
     async signIn(email, password){
         try {
           const response = await axios.post(`${URL_API}/signin`, {email, password})
           console.log(response.data);
-          // localStorage.setItem('userCredentials', JSON.stringify(response))
+          window.localStorage.setItem('userCredentials', JSON.stringify(response.data))
+          this.user = response.data.user
         } catch (error) {
           console.log(error);
         }
@@ -27,10 +40,16 @@ export const useUserStore = defineStore('user', {
           firstname, lastname, email, password
         })
         console.log(response.data);
+        window.localStorage.setItem('userCredentials', JSON.stringify(response.data))
+        this.user = response.data.user
       } catch (error) {
         console.log(error);
       }
     },
     async signUpWithGoogle(token){},
+    logOut(){
+      window.localStorage.removeItem('userCredentials')
+      this.user = null
+    }
   },
 });

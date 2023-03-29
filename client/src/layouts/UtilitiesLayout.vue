@@ -65,8 +65,9 @@
 
 <script>
 import { useUserStore } from "src/stores/user";
-import { computed, ref } from "vue";
+import { computed, ref, watchEffect } from "vue";
 import EssentialLink from "../components/EssentialLink.vue";
+import { useRouter } from 'vue-router';
 
 const linksList = [
   {
@@ -97,14 +98,18 @@ export default {
   },
   setup() {
     const storeUser = useUserStore()
-    const user = computed(()=>storeUser.getUser)
+    const user = computed(()=>storeUser.isAuthtenticated)
+    const router = useRouter()
+    watchEffect(()=>{
+      window.localStorage.getItem('userCredentials') && storeUser.setUser()
+    })
     return {
-      user,
+      user: user,
       links: linksList,
       drawer: ref(false),
       miniState: ref(true),
       logout: () => {
-        console.log("Logout!!");
+        storeUser.logOut()
       },
     };
   },

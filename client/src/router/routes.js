@@ -4,7 +4,7 @@ const routes = [
     component: () => import("layouts/UtilitiesLayout.vue"),
     children: [
       { path: "", component: () => import("pages/IndexPage.vue") },
-      { path: "account", component: () => import("pages/AccountPage.vue") },
+      { path: "account", component: () => import("pages/AccountPage.vue"), meta: {requiredAuth : true} },
       { path: "about", component: () => import("pages/AboutPage.vue") },
       { path: "todo", component: () => import("pages/ToDoApp.vue") },
       {
@@ -17,7 +17,9 @@ const routes = [
   {
     path: '/',
     children: [
-      {path: 'login', component: ()=>import('pages/Login/LogIn.vue')}
+      {name: 'Login', path: 'login', component: ()=>import('pages/Login/LogIn.vue'), meta: {
+        requiredAuth : false
+      }}
     ]
   },
 
