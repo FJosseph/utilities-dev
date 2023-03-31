@@ -77,9 +77,9 @@
     :todos="col.todos"
   />
   <!-- Add Columns -->
-  <div class="drop-target rounded-borders overflow-hidden justify-start">
+  <!-- <div class="drop-target rounded-borders overflow-hidden justify-start">
     <div id="add-column" class="q-ma-sm q-pa-sm" draggable="false">Add</div>
-  </div>
+  </div> -->
 </template>
 <script setup>
 import { provide } from "vue";

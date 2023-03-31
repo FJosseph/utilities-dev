@@ -75,6 +75,7 @@ header {
 }
 .drop-target {
   min-height: 50em;
+  max-height: 53em;
   min-width: 300px;
   background-color: #f3f4f6;
   // background-color: gainsboro;

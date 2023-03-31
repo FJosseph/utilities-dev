@@ -1,21 +1,22 @@
 <template>
-  <div
-    @dragenter="onDragEnter"
-    @dragleave="onDragLeave"
-    @dragover="onDragOver"
-    @drop="onDrop"
-    class="drop-target rounded-borders overflow-hidden"
-  >
+  <div class="drop-target" draggable="false">
     <div class="q-ma-sm header-todo q-pa-sm" draggable="false">{{ name }}</div>
-    <q-scroll-area style="min-height: 90%; width: 100%" class="q-px-sm q-pb-sm">
-      <item-to-do
-        v-for="item in todos"
-        :key="item.id"
-        :id="item.id"
-        :text="item.text"
-        :color="colorTodos[item.color]"
-      />
-    </q-scroll-area>
+    <div class="c-target q-px-sm overflow-hidden"
+    >
+      <q-scroll-area 
+      @dragenter="onDragEnter"
+      @dragleave="onDragLeave"
+      @dragover="onDragOver"
+      @drop="onDrop"  style="min-height: 90%; width: 100%" class="rounded-borders">
+        <item-to-do
+          v-for="item in todos"
+          :key="item.id"
+          :id="item.id"
+          :text="item.text"
+          :color="colorTodos[item.color]"
+        />
+      </q-scroll-area>
+    </div>
   </div>
 </template>
 <script setup>
@@ -37,6 +38,14 @@ defineProps({
 const colorTodos = inject("colorTodos");
 </script>
 <style>
+.c-target{
+  width: 100%; 
+  height: 100%; 
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  align-items: center;
+}
 @media only screen and (max-width: 500px) {
   .drop-target {
     height: 200px;

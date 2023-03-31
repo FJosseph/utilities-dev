@@ -17,11 +17,6 @@ module.exports = (sequelize) =>{
             type: DataTypes.INTEGER,
             allowNull: false,
             defaultValue: 0,
-            // autoIncrement: true,
-            // validate: {
-            //     min: 1,
-            //     max: 6
-            // }
             validate: {
                 min: 0,
                 max: 5

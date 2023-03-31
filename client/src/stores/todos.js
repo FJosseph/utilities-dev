@@ -15,13 +15,15 @@ let examplesColumns = [
   { name: "Review", status: 3, icon: "verified" },
 ];
 
-export const useDataTodosStore = defineStore("todos", {
-  state: () => ({
-    todo: [
+let examplesTodos = [
       { id: 1, title: "", text: "Parfait", status: 0, color: "1" },
       { id: 2, title: "", text: "Excelente", status: 1, color: "2" },
       { id: 3, title: "", text: "Adhoc", status: 0, color: "3" },
-    ],
+]
+
+export const useDataTodosStore = defineStore("todos", {
+  state: () => ({
+    todo: [],
     columnsStatement: [],
   }),
   getters: {
@@ -52,5 +54,8 @@ export const useDataTodosStore = defineStore("todos", {
     setColumns() {
       this.columnsStatement = examplesColumns;
     },
+    setTodos(){
+      this.todo = examplesTodos
+    }
   },
 });
