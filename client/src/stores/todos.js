@@ -6,17 +6,21 @@ import axios from "axios";
 const { VUE_TODO } = process.env
 let examplesColumns = [
   {
-    name: "Todo",
+    id: '1',
+    title: "Todo",
     status: 0,
     icon: "event_available",
   },
   {
-    name: "In progress",
+    id: '2',
+    title: "In progress",
     status: 1,
     icon: "",
   },
-  { name: "Completed", status: 2, icon: "check_circle" },
-  { name: "Review", status: 3, icon: "verified" },
+  { id: '3',
+    title: "Completed", status: 2, icon: "check_circle" },
+  { id: '4',
+    title: "Review", status: 3, icon: "verified" },
 ];
 
 let examplesTodos = [
@@ -56,7 +60,7 @@ export const useDataTodosStore = defineStore("todos", {
       console.log(add.data);
       this.setAll()
     },
-    addTodo(data) {
+    async addTodo(data) {
       //! <--- Example without api and database
       if(!isAuthtenticated.value){
       const dataFinal = { ...data, id: Date.now(), status: 0 };
@@ -65,8 +69,26 @@ export const useDataTodosStore = defineStore("todos", {
       return
       }
       //! --->
+      try {
+        const newTodo = await axios.post(`${VUE_TODO}/todo`, {
+          ...data, idUser: getUser.value.id
+        })
+        console.log(newTodo.data);     
+        this.setAll()   
+      } catch (error) {
+        console.log(error);
+      }
     },
-    dropTodo(id) {
+    async updateTodo(idTodo, idCol){
+      try {
+        const response = await axios.put(`${VUE_TODO}/todo/${idTodo}?idCol=${idCol}`)
+        console.log(response.data);
+        this.setAll()
+      } catch (error) {
+        console.log(error);
+      }
+    },
+    deleteTodo(id) {
       //! <--- Example without api and database
       this.todo = this.todo.filter((x) => x.id !== id);
       //! --->
@@ -92,7 +114,7 @@ export const useDataTodosStore = defineStore("todos", {
     async setAll(){
       if(isAuthtenticated.value){
         const data = await axios.get(`${VUE_TODO}/all?idUser=${getUser.value.id}`)
-        this.all = data.data.cols
+        this.all = data.data.cols.sort((a,b)=>a.status-b.status)
       }
     }
   },

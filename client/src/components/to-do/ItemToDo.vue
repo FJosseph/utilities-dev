@@ -13,7 +13,7 @@ import { inject } from "vue";
 
 const onDragStart = inject("drag-start");
 defineProps({
-  id: { type: Number },
+  id: { type: String },
   text: { type: String },
   color: { type: String },
 });

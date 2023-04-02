@@ -7,7 +7,7 @@
       @dragenter="onDragEnter"
       @dragleave="onDragLeave"
       @dragover="onDragOver"
-      @drop="onDrop"  style="min-height: 90%; width: 100%" class="rounded-borders">
+      @drop="onDrop"  style="min-height: 90%; width: 100%" class="rounded-borders" :id="id">
         <item-to-do
           v-for="item in todos"
           :key="item.id"
@@ -29,6 +29,7 @@ const onDragOver = inject("drag-over");
 const onDrop = inject("on-drop");
 
 defineProps({
+  id: { type: String },
   name: { type: String },
   title: {type: String},
   status: { type: Number },

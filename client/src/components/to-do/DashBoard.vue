@@ -71,6 +71,7 @@
   <ColumnsBox
     v-for="col in allData"
     :key="col.status"
+    :id="col.id"
     :name="col.name"
     :title="col.title"
     :status="col.status"
@@ -84,7 +85,10 @@
 </template>
 <script setup>
 import { provide } from "vue";
+import { useDataTodosStore } from "../../stores/todos";
 import ColumnsBox from "./ColumnsBox.vue";
+// Store
+const storeTodo = useDataTodosStore()
 // List Example
 const listStatus = [
   {
@@ -144,6 +148,12 @@ const onDrop = (e) => {
   draggedEl.parentNode.removeChild(draggedEl);
   e.target.appendChild(draggedEl);
   e.target.classList.remove("drag-enter");
+  // Update todo
+  const idCol = e.target.parentNode.parentElement.id
+  const idTodo = draggedEl.id
+  console.log('col:', idCol);
+  console.log('todo:', idTodo);
+  storeTodo.updateTodo(idTodo, idCol)
 };
 
 // Injectando las funciones

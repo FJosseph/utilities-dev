@@ -20,6 +20,7 @@
   <div class="container-d-todo q-mt-md">
     <div class="row q-gutter-sm q-px-md q-pt-md">
       <ToDoApp v-if="!$q.screen.lt.sm" :allData="allTodosByColumns" />
+      <!-- <ToDoApp v-if="!$q.screen.lt.sm" :allData="allTodosByColumnsMOCK" /> -->
       <div v-else>Esto es excelente</div>
     </div>
   </div>
@@ -39,7 +40,7 @@ const storeTodos = useDataTodosStore();
 
 // Getters
 // Data with out API and Database
-// const allTodosByColumns = computed(() => storeTodos.getTodoByColumns);
+const allTodosByColumnsMOCK = computed(() => storeTodos.getTodoByColumns);
 // Data with database
 const allTodosByColumns = computed(() => storeTodos.getAll);
 
