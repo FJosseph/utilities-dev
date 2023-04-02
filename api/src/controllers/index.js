@@ -49,6 +49,7 @@ const getUser = async(id)=>{
                 id
             }
         })
+        if(!user) throw new Error("User doesn't exists!")
         return user        
 }
 

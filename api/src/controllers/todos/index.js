@@ -55,17 +55,20 @@ const addTodos = async (idUser, title, text, color)=>{
 }
 
 const updateTodo = async (id, idCol)=>{
-    const todo = await Todo.findOne({
-        where: {
-            id
-        }
-    })
     const col = await Col.findOne({
         where: {
             id: idCol
         }
     })
+    const todo = await Todo.findOne({
+        where: {
+            id
+        }
+    })
+    todo.status = col.dataValues.status
+    // console.log(col);
     await todo.setCol(col)
+    await todo.save()
     return {
         message: 'Todo is updated'
     }

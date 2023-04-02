@@ -21,6 +21,8 @@ export const useUserStore = defineStore('user', {
         this.user = response.data
       } catch (error) {
         console.log(error);
+        if(error.response.data.error == "User doesn't exists!") window.localStorage.removeItem('userCredentials')
+        // console.log(error.response.data.error);
       }
     },
     async signIn(email, password){
