@@ -72,6 +72,7 @@
     v-for="col in allData"
     :key="col.status"
     :name="col.name"
+    :title="col.title"
     :status="col.status"
     :icon="col.icon"
     :todos="col.todos"

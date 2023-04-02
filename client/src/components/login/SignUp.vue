@@ -70,9 +70,11 @@
 <script setup>
 import { useUserStore } from "src/stores/user";
 import { inject, ref, watch, watchEffect } from "vue";
+import { useDataTodosStore } from "../../stores/todos";
 
 // Stores
 const storeUser = useUserStore()
+const storeTodos = useDataTodosStore()
 
 // Estados input
 const input = ref({

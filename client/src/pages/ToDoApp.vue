@@ -38,10 +38,14 @@ provide("modal", modal);
 const storeTodos = useDataTodosStore();
 
 // Getters
-const allTodosByColumns = computed(() => storeTodos.getTodoByColumns);
+// Data with out API and Database
+// const allTodosByColumns = computed(() => storeTodos.getTodoByColumns);
+// Data with database
+const allTodosByColumns = computed(() => storeTodos.getAll);
 
 // Colors
 const colorTodos = {
+  0: "navy",
   1: "navy",
   2: "orange",
   3: "green",
@@ -56,6 +60,8 @@ const colorTodos = {
 provide("colorTodos", colorTodos);
 watchEffect(() => {
   storeTodos.setColumns();
+  storeTodos.setTodos()
+  storeTodos.setAll()
 });
 </script>
 

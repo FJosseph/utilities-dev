@@ -1,6 +1,6 @@
 <template>
   <div class="drop-target" draggable="false">
-    <div class="q-ma-sm header-todo q-pa-sm" draggable="false">{{ name }}</div>
+    <div class="q-ma-sm header-todo q-pa-sm" draggable="false">{{ title }}</div>
     <div class="c-target q-px-sm overflow-hidden"
     >
       <q-scroll-area 
@@ -30,6 +30,7 @@ const onDrop = inject("on-drop");
 
 defineProps({
   name: { type: String },
+  title: {type: String},
   status: { type: Number },
   icon: { type: String },
   todos: { type: Array },
