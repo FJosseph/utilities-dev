@@ -12,6 +12,7 @@
           v-for="item in todos"
           :key="item.id"
           :id="item.id"
+          :title="item.title"
           :text="item.text"
           :color="colorTodos[item.color]"
         />

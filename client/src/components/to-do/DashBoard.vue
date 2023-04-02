@@ -202,7 +202,7 @@ defineProps({
 
 .box {
   width: 100%;
-  height: 150px;
+  height: 170px;
   margin: 0.5em 0;
   border-radius: 15px;
   // float: left;
