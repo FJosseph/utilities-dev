@@ -62,7 +62,9 @@ provide("colorTodos", colorTodos);
 watchEffect(() => {
   storeTodos.setColumns();
   storeTodos.setTodos()
-  storeTodos.setAll()
+  setTimeout(()=>{
+    storeTodos.setAll()
+  }, 10)
 });
 </script>
 
