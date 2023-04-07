@@ -51,16 +51,18 @@ watchEffect(()=>{
     background-image: url('../../assets/background_form.jpg');
     background-size: auto;
     background-repeat: no-repeat;
+    background-position: top;
 }
 
 .form-container{
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 30em;
+    /* width: 30em; */
+    width: 95%;
     background-color: white;
     border-radius: 10px;
-    /* max-width: 40em; */
+    max-width: 30em;
     min-height: 30em;
     max-height: 52em;
     box-shadow: rgba(17, 12, 46, 0.15) 0px 48px 100px 0px;
