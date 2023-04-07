@@ -32,6 +32,7 @@ export const useUserStore = defineStore('user', {
           window.localStorage.setItem('userCredentials', JSON.stringify(response.data))
           this.user = response.data.user
         } catch (error) {
+          throw new Error(error.response.data.error)
           console.log(error);
         }
     },

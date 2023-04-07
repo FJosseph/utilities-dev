@@ -43,6 +43,7 @@
 <script setup>
 import { useUserStore } from "src/stores/user";
 import { inject, ref, watch, watchEffect } from "vue";
+import { Notify } from 'quasar'
 
 // Stores
 const storeUser = useUserStore()
@@ -59,8 +60,16 @@ const changeForm = ()=>{
   formState.value = false
 }
 
-const submit = ()=>{
-  storeUser.signIn(email.value, password.value)
+const submit = async()=>{
+  try {
+    await storeUser.signIn(email.value, password.value)    
+  } catch (error) {
+    Notify.create({
+      message: String(error).split(':')[1],
+      color: 'red',
+      position: 'top'
+    })
+  }
 }
 
 </script>

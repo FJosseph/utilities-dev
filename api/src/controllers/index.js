@@ -11,8 +11,8 @@ const logIn = async(email, password, google)=>{
             email
         }
     })
-    if(!user) throw new Error("User isn't exists")
-    const validate = bcrypt.compare(password, user.password)
+    if(!user) throw new Error("User doesn't exists")
+    const validate = await bcrypt.compare(password, user.password)
     if(!validate) throw new Error('Password is not correct')
     const token = jwt.sign({id: user.id, email: user.email}, SECRET_PASSWORD, {expiresIn: 60*60*24})
     return {
@@ -28,7 +28,7 @@ const register = async(firstname, lastname, email, password, google=null)=>{
             email
         }
     })
-    if(user) throw new Error('User exists already')
+    if(user) throw new Error('User already exists')
     const newUser = await Users.create({
         firstname,
         lastname,
