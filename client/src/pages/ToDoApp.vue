@@ -14,7 +14,7 @@
     "
     label="New Task"
     icon-right="add"
-    :class="`p-pa-md ${$q.screen.lt.sm?'q-ml-lg':''}`"
+    :class="`p-pa-md ${$q.screen.lt.sm?'q-ml-sm':''}`"
     @click="modal = true"
     :size="$q.screen.lt.sm?'md':''"
   />

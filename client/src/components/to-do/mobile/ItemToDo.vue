@@ -1,43 +1,66 @@
 <template>
     <div :class="`box-mobile ${$q.screen.lt.sm?'responsive-mb':''}`">
         <div
-    class="q-pa-md bg-white q-pl-xl"
+    class="q-pa-md bg-white q-pl-lg"
     style="position: relative; display: flex; align-items: start; flex-direction: column;z-index: 1;"
   >
-  <!-- <q-btn flat round color="black" icon="more_vert" size="20px"  style="position: absolute;left: 83%;top: 10%;"/> -->
   <q-fab
-        v-model="fab2"
-        external-label
-        vertical-actions-align="left"
-        flat
-        unelevated
-        icon="more_vert"
-        direction="down"
-        style="position: absolute;left: 83%;top: 10%;"
-      >
-        <q-fab-action external-label color="primary" @click="onClick" icon="mail" label="Email" />
-        <q-fab-action external-label color="secondary" @click="onClick" icon="alarm" label="Alarm" />
-        <q-fab-action external-label color="orange" @click="onClick" icon="airplay" label="Airplay" />
-        <q-fab-action external-label color="accent" @click="onClick" icon="room" label="Map" />
-  </q-fab>
-  <div class="text-h5 text-weight-regular q-my-md">
+  v-model="fab2"
+  external-label
+  vertical-actions-align="left"
+  flat
+  unelevated
+  icon="more_vert"
+  direction="down"
+  style="position: absolute;left: 83%;top: 5%;"
+  >
+  <!-- <q-fab-action external-label color="orange" @click="onClick" icon="edit" label="Edit" label-position="left"/>
+  <q-fab-action external-label color="accent" @click="onClick" icon="room" label="Change Status" label-position="left"/> -->
+  <q-fab-action color="pink" @click="onClick" icon="edit" label-position="left"/>
+  <q-fab-action color="blue-grey" disabled @click="onClick" icon="delete" label-position="left"/>
+</q-fab>
+<!-- <q-btn flat round color="black" icon="delete" size="18px"  style="position: absolute;left: 83.5%;top: 30%;"/> -->
+  <div class="text-h5 text-weight-regular q-mt-md q-ml-md">
     {{ title }}
   </div>
-  <div class="text-h6  text-weight-light q-my-md" style="height: 50%;">
+  <div class="text-h6  text-weight-light q-my-md q-ml-md" style="height: 50%;">
     {{ text }}
   </div>
-  <div class="row" style="width: 100%;justify-content: right;" size="lg">
-      <q-chip :label="badge.title" text-color="white" :color="badge.color"/>
-  </div>
+      <q-chip clickable @click="handleModalStatus(id, badge.id)" :label="badge.title" text-color="white" :color="badge.color" style="position: absolute;right: 5%;top: 84%;">
+        <!-- <q-popup-edit touch-position="left" v-if="$q.screen.lt.sm" v-model="label2" :cover="true" :offset="[80, 13]" style="background-color: transparent;border: none; box-shadow: none;">
+          <q-chip v-for="col in Object.values(columns).filter(x=>x.id != badge.id)" :label="col.title" text-color="white" :color="col.color" :key="col.id"/>
+        </q-popup-edit> -->
+      </q-chip>
   </div>
     </div>
 </template>
 <script setup>
-defineProps({
+import { computed, inject, ref } from "vue"
+
+const PROPS = defineProps({
+    id:{type: String},
     title: {type: String},
     text: {type: String},
     badge: {type: Object},
 })
+
+const label2 = ref('')
+// Columns
+const columns = inject('columns')
+
+// Modal
+const modalStatus = inject('modalStatus')
+const dataTodoId = inject('idTodoChange')
+const handleModalStatus = (idTodo, idCol)=>{
+  modalStatus.value = true
+  dataTodoId.value = {idTodo, idCol}
+}
+
+// const columnsChip = computed(()=>Object.values(columns.value).filter(x=>x.id != PROPS.badge.id))
+
+
+const fab2 = ref(false)
+const onClick = ()=>{}
 </script>
 <style>
 </style>

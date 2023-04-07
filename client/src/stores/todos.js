@@ -24,9 +24,9 @@ let examplesColumns = [
 ];
 
 let examplesTodos = [
-      { id: '10', title: "", text: "Parfait", status: 0, color: "1" },
-      { id: '20', title: "", text: "Excelente", status: 1, color: "2" },
-      { id: '30', title: "", text: "Adhoc", status: 0, color: "3" },
+      { id: '10', title: "Bienvenue", text: "Parfait", status: 0, color: "1" },
+      { id: '20', title: "Bienvenido", text: "Excelente", status: 1, color: "2" },
+      { id: '30', title: "Welcome", text: "Adhoc", status: 0, color: "3" },
 ]
 
 const storeUser = useUserStore()
