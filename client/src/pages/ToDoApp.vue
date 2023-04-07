@@ -67,7 +67,7 @@ watchEffect(() => {
     storeTodos.setColumns();
     storeTodos.setTodos()
     storeTodos.setAll()
-  }, 10)
+  }, 100)
 });
 </script>
 

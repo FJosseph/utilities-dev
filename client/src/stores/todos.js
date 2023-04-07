@@ -113,6 +113,7 @@ export const useDataTodosStore = defineStore("todos", {
       try {
         const response = await axios.delete(`${VUE_TODO}/todo/${id}`)
         console.log(response);
+        this.setAll()
       } catch (error) {
         console.log(error);
       }
@@ -131,8 +132,8 @@ export const useDataTodosStore = defineStore("todos", {
         return
       }
       //! --->
-      const cols = await axios.get(`${VUE_TODO}/col?idUser=${getUser.value.id}`)
-      console.log(cols.data);
+      // const cols = await axios.get(`${VUE_TODO}/col?idUser=${getUser.value.id}`)
+      // this.columnsStatement = cols.data.cols
     },
     setTodos(){
       //! <--- Example without api and database
@@ -153,6 +154,8 @@ export const useDataTodosStore = defineStore("todos", {
       if(isAuthtenticated.value){
         const data = await axios.get(`${VUE_TODO}/all?idUser=${getUser.value.id}`)
         this.all = data.data.cols.sort((a,b)=>a.status-b.status)
+        this.columnsStatement = this.all.map(x=>({id: x.id, status: x.status, title: x.title}))
+        this.todo = this.all.reduce((a,b)=>a.concat(b.todos),[])
         return
       }
       this.all = this.getTodoByColumns
