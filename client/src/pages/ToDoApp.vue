@@ -63,9 +63,9 @@ const colorTodos = {
 };
 provide("colorTodos", colorTodos);
 watchEffect(() => {
-  storeTodos.setColumns();
-  storeTodos.setTodos()
   setTimeout(()=>{
+    storeTodos.setColumns();
+    storeTodos.setTodos()
     storeTodos.setAll()
   }, 10)
 });

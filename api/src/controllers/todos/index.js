@@ -74,6 +74,17 @@ const updateTodo = async (id, idCol)=>{
     }
 }
 
+const deleteTodo = async (id)=>{
+    await Todo.destroy({
+        where: {
+            id
+        }
+    })
+    return {
+        message: 'Todo has been deleted'
+    }
+}
+
 
 //* COLUMNS TODOS
 const getColsByUser = async (idUser)=>{
@@ -118,7 +129,9 @@ module.exports = {
     getAll,
     getColsByUser,
     addCol,
+    //* Todos
     getTodosByUser,
     addTodos,
-    updateTodo
+    updateTodo,
+    deleteTodo
 }

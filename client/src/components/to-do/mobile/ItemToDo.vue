@@ -17,7 +17,7 @@
   <!-- <q-fab-action external-label color="orange" @click="onClick" icon="edit" label="Edit" label-position="left"/>
   <q-fab-action external-label color="accent" @click="onClick" icon="room" label="Change Status" label-position="left"/> -->
   <q-fab-action color="pink" @click="onClick" icon="edit" label-position="left"/>
-  <q-fab-action color="blue-grey" disabled @click="onClick" icon="delete" label-position="left"/>
+  <q-fab-action color="blue-grey" @click="deleteTodo(id)" icon="delete" label-position="left"/>
 </q-fab>
 <!-- <q-btn flat round color="black" icon="delete" size="18px"  style="position: absolute;left: 83.5%;top: 30%;"/> -->
   <div class="text-h5 text-weight-regular q-mt-md q-ml-md">
@@ -36,6 +36,10 @@
 </template>
 <script setup>
 import { computed, inject, ref } from "vue"
+import { useDataTodosStore } from "../../../stores/todos"
+
+// Stores
+const storeTodos = useDataTodosStore()
 
 const PROPS = defineProps({
     id:{type: String},
@@ -60,6 +64,9 @@ const handleModalStatus = (idTodo, idCol)=>{
 
 
 const fab2 = ref(false)
+const deleteTodo = (id)=>{
+  storeTodos.deleteTodo(id)
+}
 const onClick = ()=>{}
 </script>
 <style>

@@ -1,5 +1,5 @@
 const { Router } = require('express')
-const { addTodos, getTodosByUser, updateTodo } = require('../../controllers/todos')
+const { addTodos, getTodosByUser, updateTodo, deleteTodo } = require('../../controllers/todos')
 const router = Router()
 
 //* TODOS
@@ -39,6 +39,14 @@ router.put('/:id', async (req, res)=>{
     }
 })
 // Eliminar todo
-router.delete('/:id', (req,res)=>{})
+router.delete('/:id', async(req,res)=>{
+    const { id } = req.params
+    try {
+        const response = await deleteTodo(id)
+        res.json(response)
+    } catch (error) {
+        res.status(404).json({message: error.message})
+    }
+})
 
 module.exports = router

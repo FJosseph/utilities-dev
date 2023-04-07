@@ -101,10 +101,21 @@ export const useDataTodosStore = defineStore("todos", {
         console.log(error);
       }
     },
-    deleteTodo(id) {
+    async deleteTodo(id) {
       //! <--- Example without api and database
-      this.todo = this.todo.filter((x) => x.id !== id);
+      if(!isAuthtenticated.value){
+        this.todo = this.todo.filter((x) => x.id != id);
+        window.localStorage.setItem('todos', JSON.stringify(this.todo))
+        this.setAll()        
+        return
+      }
       //! --->
+      try {
+        const response = await axios.delete(`${VUE_TODO}/todo/${id}`)
+        console.log(response);
+      } catch (error) {
+        console.log(error);
+      }
     },
     async setColumns() {
       //! <--- Example without api and database
