@@ -69,6 +69,7 @@ export const useDataTodosStore = defineStore("todos", {
       console.log(dataFinal);
       this.todo.push(dataFinal);
       window.localStorage.setItem('todos', JSON.stringify(this.todo))
+      this.setAll()
       return
       }
       //! --->

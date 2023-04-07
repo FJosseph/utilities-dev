@@ -1,6 +1,6 @@
 <template>
   <q-dialog v-model="modal">
-    <q-card class="form-todo">
+    <q-card class="form-todo" style="max-width: 30em;">
       <q-form @submit.prevent="submit">
         <q-card-section>
           <div class="text-h4 text-center q-mt-sm">Create a new task</div>
@@ -48,22 +48,22 @@
         </q-card-actions>
       </q-form>
     </q-card>
-  </q-dialog>
-  <!-- Modal color picker -->
-  <q-dialog v-model="pickerColor">
-    <div>
-      <q-color
-        v-model="colorCurrent"
-        no-footer
-        no-header
-        no-header-tabs
-        flat
-        default-view="palette"
-        :palette="palette"
-        class="color-picker"
-        bordered
-      />
-    </div>
+    <!-- Modal color picker -->
+    <q-dialog v-model="pickerColor">
+      <div>
+        <q-color
+          v-model="colorCurrent"
+          no-footer
+          no-header
+          no-header-tabs
+          flat
+          default-view="palette"
+          :palette="palette"
+          class="color-picker"
+          bordered
+        />
+      </div>
+    </q-dialog>
   </q-dialog>
 </template>
 <script setup>
@@ -117,7 +117,8 @@ const submit = () => {
 </script>
 <style>
 .form-todo {
-  min-width: 30em;
+  /* min-width: 30em; */
+  width: 100%;
 }
 
 .color-picker {
