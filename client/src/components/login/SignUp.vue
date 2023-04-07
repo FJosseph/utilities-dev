@@ -71,6 +71,7 @@
 import { useUserStore } from "src/stores/user";
 import { inject, ref, watch, watchEffect } from "vue";
 import { useDataTodosStore } from "../../stores/todos";
+import { Notify } from "quasar";
 
 // Stores
 const storeUser = useUserStore()
@@ -100,8 +101,16 @@ const changeForm = ()=>{
   formState.value = true
 }
 
-const submit = ()=>{
-  storeUser.signUp(input.value)
+const submit = async()=>{
+  try {
+    await storeUser.signUp(input.value)    
+  } catch (error) {
+    Notify.create({
+      message: String(error).split(':')[1],
+      color: 'red',
+      position: 'top'
+    })
+  }
 }
 
 </script>
