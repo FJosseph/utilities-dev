@@ -1,6 +1,5 @@
 .DS_Store
 .thumbs.db
-.env
 node_modules
 
 # Quasar core related directories
@@ -21,6 +20,10 @@ node_modules
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+# dotenv environment variables file
+.env
+.env.test
 
 # Editor directories and files
 .idea
