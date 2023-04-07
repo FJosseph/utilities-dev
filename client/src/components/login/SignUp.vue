@@ -51,7 +51,7 @@
         <button id="submit" type="submit">Sign Up</button>
       </div>
 
-      <q-separator inset />
+      <!-- <q-separator inset />
 
       <div class="row justify-center q-my-md">
         <q-btn outline>
@@ -63,7 +63,7 @@
             <img src="https://cdn.icon-icons.com/icons2/2351/PNG/512/logo_google_icon_143197.png">
           </q-avatar>
     </q-btn>
-      </div>
+      </div> -->
     </q-form>
     <!-- </div> -->
 </template>

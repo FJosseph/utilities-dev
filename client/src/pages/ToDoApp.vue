@@ -14,16 +14,18 @@
     "
     label="New Task"
     icon-right="add"
-    class="p-pa-md"
+    :class="`p-pa-md ${$q.screen.lt.sm?'q-ml-lg':''}`"
     @click="modal = true"
+    :size="$q.screen.lt.sm?'md':''"
   />
-  <div class="container-d-todo q-mt-md">
+  <div v-if="!$q.screen.lt.sm && !$q.screen.lt.md && !$q.screen.lg" class="container-d-todo q-mt-md">
     <div class="row q-gutter-sm q-px-md q-pt-md">
-      <ToDoApp v-if="!$q.screen.lt.sm" :allData="allTodosByColumns" />
+      <ToDoApp  :allData="allTodosByColumns" />
       <!-- <ToDoApp v-if="!$q.screen.lt.sm" :allData="allTodosByColumnsMOCK" /> -->
-      <div v-else>Esto es excelente</div>
+      <!-- <div v-else>Esto es excelente</div> -->
     </div>
   </div>
+  <ToDoAppMobile v-else/>
   <!-- Formulario modal -->
   <modal-form />
 </template>
@@ -32,6 +34,7 @@
 import { computed, provide, ref, watchEffect } from "vue";
 import ToDoApp from "../components/to-do/DashBoard.vue";
 import ModalForm from "src/components/to-do/ModalForm.vue";
+import ToDoAppMobile from "src/components/to-do/mobile/IndexPage.vue";
 import { useDataTodosStore } from "../stores/todos";
 const modal = ref(false);
 provide("modal", modal);

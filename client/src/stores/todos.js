@@ -39,6 +39,8 @@ export const useDataTodosStore = defineStore("todos", {
     all: []
   }),
   getters: {
+    getTodos: (state)=>state.todo,
+    getColumns: (state)=>state.columnsStatement,
     getTodoByColumns: (state) => {
       return state.columnsStatement.reduce(
         (a, b) =>

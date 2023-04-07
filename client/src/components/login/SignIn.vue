@@ -1,7 +1,7 @@
 <template>
   <!-- <div class="form q-gutter-md q-px-lg"> -->
     <q-form @submit="submit" class="form q-gutter-sm q-px-lg">
-    <div class="text-center text-h4 q-mt-xl">Sign In</div>
+    <div class="text-center text-h4 q-mt-lg">Sign In</div>
       <div class="row">
         <q-input class="col" color="deep-purple-7" outlined v-model="email" label="Email" lazy-rules :rules="[(val)=>val.length || 'Ingresa un usuario']">
           <template v-slot:append>
@@ -25,9 +25,7 @@
       <div class="row justify-center">
         <button id="submit" type="submit">Sign In</button>
       </div>
-      <!-- <div class="row justify-center q-my-md"> -->
-        <q-separator inset />
-      <!-- </div> -->
+        <!-- <q-separator inset />
       <div class="row justify-center q-my-md">
         <q-btn outline>
           <div class="q-mr-md">
@@ -38,7 +36,7 @@
             <img src="https://cdn.icon-icons.com/icons2/2351/PNG/512/logo_google_icon_143197.png">
           </q-avatar>
     </q-btn>
-      </div>
+      </div> -->
     </q-form>
     <!-- </div> -->
 </template>
