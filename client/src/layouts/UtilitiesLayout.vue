@@ -109,7 +109,7 @@ export default {
       drawer: ref(false),
       miniState: ref(true),
       logout: () => {
-        storeUser.logOut()
+        storeUser.logOut() && router.push('/')
       },
     };
   },
