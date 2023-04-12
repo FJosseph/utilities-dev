@@ -3,7 +3,8 @@ import { computed } from "vue";
 import {useUserStore} from './user'
 import axios from "axios";
 
-const { VUE_TODO } = process.env
+// const { VUE_TODO } = process.env
+const VUE_TODO = 'https://utilities-dev.onrender.com/todo-app'
 let examplesColumns = [
   {
     id: '1',

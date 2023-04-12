@@ -2,7 +2,8 @@ import axios from 'axios';
 import { defineStore } from 'pinia';
 
 // const URL_API = 'http://localhost:3001'
-const { VUE_API: URL_API } = process.env
+const URL_API = 'https://utilities-dev.onrender.com'
+// const { VUE_API: URL_API } = process.env
 
 export const useUserStore = defineStore('user', {
   state: () => ({
