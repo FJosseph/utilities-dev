@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon index"
+    "start": "nodemon -L"
   },
   "author": "",
   "license": "ISC",
@@ -18,7 +18,7 @@
     "jsonwebtoken": "^9.0.0",
     "morgan": "^1.10.0",
     "nodemon": "^2.0.22",
-    "pg": "^8.10.0",
-    "sequelize": "^6.30.0"
+    "pg": "^8.5.1",
+    "sequelize": "^6.3.5"
   }
 }
