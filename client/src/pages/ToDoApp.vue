@@ -1,33 +1,44 @@
 <template>
-  <header class="text-cemter">Create your items for todo</header>
-  <q-btn
-    unelevated
-    style="
-      color: white;
-      background: rgb(127, 117, 245);
-      background: linear-gradient(
-        90deg,
-        rgba(127, 117, 245, 1) 0%,
-        rgba(148, 145, 239, 1) 68%,
-        rgba(143, 192, 255, 1) 100%
-      );
-    "
-    label="New Task"
-    icon-right="add"
-    :class="`p-pa-md ${$q.screen.lt.sm?'q-ml-sm':''}`"
-    @click="modal = true"
-    :size="$q.screen.lt.sm?'md':''"
-  />
-  <div v-if="!$q.screen.lt.sm && !$q.screen.lt.md && !$q.screen.lg" class="container-d-todo q-mt-md">
-    <div class="row q-gutter-sm q-px-md q-pt-md">
-      <ToDoApp  :allData="allTodosByColumns" />
-      <!-- <ToDoApp v-if="!$q.screen.lt.sm" :allData="allTodosByColumnsMOCK" /> -->
-      <!-- <div v-else>Esto es excelente</div> -->
+  <div style="height: 100vh;">
+    <div v-if="!spinner">
+      <header class="text-cemter">Create your items for todo</header>
+      <q-btn
+        unelevated
+        style="
+          color: white;
+          background: rgb(127, 117, 245);
+          background: linear-gradient(
+            90deg,
+            rgba(127, 117, 245, 1) 0%,
+            rgba(148, 145, 239, 1) 68%,
+            rgba(143, 192, 255, 1) 100%
+          );
+        "
+        label="New Task"
+        icon-right="add"
+        :class="`p-pa-md ${$q.screen.lt.sm?'q-ml-sm':''}`"
+        @click="modal = true"
+        :size="$q.screen.lt.sm?'md':''"
+      />
+      <div v-if="!$q.screen.lt.sm && !$q.screen.lt.md && !$q.screen.lg" class="container-d-todo q-mt-md">
+        <div class="row q-gutter-sm q-px-md q-pt-md">
+          <ToDoApp  :allData="allTodosByColumns" />
+          <!-- <ToDoApp v-if="!$q.screen.lt.sm" :allData="allTodosByColumnsMOCK" /> -->
+          <!-- <div v-else>Esto es excelente</div> -->
+        </div>
+      </div>
+      <ToDoAppMobile v-else/>
+    </div>
+    <!-- Formulario modal -->
+    <modal-form />
+    <div v-if="spinner"  style="height: 100%;align-items: center;display: flex;justify-content: center;flex-direction: column;">
+      <q-spinner-oval color="indigo" size="10em" class="q-mb-md"/>
+
+      <div class="text-center text-h5 text-indigo-9
+
+">Cargando</div>
     </div>
   </div>
-  <ToDoAppMobile v-else/>
-  <!-- Formulario modal -->
-  <modal-form />
 </template>
 
 <script setup>
@@ -36,6 +47,9 @@ import ToDoApp from "../components/to-do/DashBoard.vue";
 import ModalForm from "src/components/to-do/ModalForm.vue";
 import ToDoAppMobile from "src/components/to-do/mobile/IndexPage.vue";
 import { useDataTodosStore } from "../stores/todos";
+
+const spinner = ref(true)
+
 const modal = ref(false);
 provide("modal", modal);
 // Store
@@ -67,7 +81,8 @@ watchEffect(() => {
     storeTodos.setColumns();
     storeTodos.setTodos()
     storeTodos.setAll()
-  }, 600)
+    spinner.value = false
+  }, 800)
 });
 </script>
 

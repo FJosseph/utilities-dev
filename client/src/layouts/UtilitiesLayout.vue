@@ -75,21 +75,21 @@ const linksList = [
     icon: "apps",
     link: "/",
   },
-  {
-    title: "About",
-    icon: "perm_contact_calendar",
-    link: "/about",
-  },
+  // {
+  //   title: "About",
+  //   icon: "perm_contact_calendar",
+  //   link: "/about",
+  // },
   {
     title: "To Do App",
     icon: "checklist",
     link: "/todo",
   },
-  {
-    title: "Calculator",
-    icon: "calculate",
-    link: "/calculator",
-  },
+  // {
+  //   title: "Calculator",
+  //   icon: "calculate",
+  //   link: "/calculator",
+  // },
 ];
 
 export default {
@@ -110,6 +110,7 @@ export default {
       miniState: ref(true),
       logout: () => {
         storeUser.logOut()
+        router.push('/')
       },
     };
   },
