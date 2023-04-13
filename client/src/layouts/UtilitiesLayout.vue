@@ -30,13 +30,13 @@
         <q-list>
           <essential-link v-for="(item, i) in links" :key="i" v-bind="item" />
           <q-separator></q-separator>
-          <essential-link v-if="user"
+          <!-- <essential-link v-if="user"
             v-bind="{
               icon: 'person',
               link: '/account',
               title: 'Account',
             }"
-          />
+          /> -->
           <essential-link v-if="!user" v-bind="{
             icon: 'login',
             link: '/login',
