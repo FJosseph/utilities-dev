@@ -6,7 +6,7 @@
     :class="`q-pa-md box ${color}`"
     style="position: relative; display: flex; align-items: center"
   >
-  <q-btn outline round color="black" dense icon="arrow_outward" size="12px"  style="position: absolute;left: 20.5em;top: 10px;">
+  <q-btn @click="()=>(modalEdit = !modalEdit) && (todoCurrent = id)" outline round color="black" dense icon="arrow_outward" size="12px"  style="position: absolute;left: 20.5em;top: 10px;">
     <q-tooltip>
       Edit your todo!
     </q-tooltip>
@@ -23,6 +23,9 @@
 import { inject } from "vue";
 
 const onDragStart = inject("drag-start");
+
+const modalEdit = inject('modal-edit')
+const todoCurrent = inject('todo-current')
 defineProps({
   id: { type: String },
   title: { type: String },

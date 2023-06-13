@@ -74,6 +74,18 @@ const updateTodo = async (id, idCol)=>{
     }
 }
 
+const updateTodoData = async(id, data)=>{
+    await Todo.update({...data},{
+        where: {
+            id
+        }
+    })
+    return {
+        message: 'Todo data was updated'
+    }
+}
+
+
 const deleteTodo = async (id)=>{
     await Todo.destroy({
         where: {
@@ -133,5 +145,6 @@ module.exports = {
     getTodosByUser,
     addTodos,
     updateTodo,
+    updateTodoData,
     deleteTodo
 }

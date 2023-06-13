@@ -1,5 +1,5 @@
 const { Router } = require('express')
-const { addTodos, getTodosByUser, updateTodo, deleteTodo } = require('../../controllers/todos')
+const { addTodos, getTodosByUser, updateTodo, deleteTodo, updateTodoData } = require('../../controllers/todos')
 const router = Router()
 
 //* TODOS
@@ -32,8 +32,13 @@ router.put('/:id', async (req, res)=>{
     const { id } = req.params
     const { idCol } = req.query
     try {
-        const todo = await updateTodo(id, idCol)
-        res.json(todo)
+        if(idCol){
+            const todo = await updateTodo(id, idCol)
+            return res.json(todo)
+        }
+        const data = req.body
+        const todo = await updateTodoData(id, data)
+        return res.json(todo)
     } catch (error) {
         res.status(404).json({message: error.message})
     }

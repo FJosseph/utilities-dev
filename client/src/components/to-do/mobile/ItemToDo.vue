@@ -48,6 +48,9 @@ const PROPS = defineProps({
     badge: {type: Object},
 })
 
+const modalEdit = inject('modal-edit')
+const todoCurrent = inject('todo-current')
+
 const label2 = ref('')
 // Columns
 const columns = inject('columns')
@@ -67,7 +70,10 @@ const fab2 = ref(false)
 const deleteTodo = (id)=>{
   storeTodos.deleteTodo(id)
 }
-const onClick = ()=>{}
+const onClick = ()=>{
+  modalEdit.value = !modalEdit.value
+  todoCurrent.value = PROPS.id
+}
 </script>
 <style>
 </style>

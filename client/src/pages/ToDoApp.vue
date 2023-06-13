@@ -31,6 +31,7 @@
     </div>
     <!-- Formulario modal -->
     <modal-form />
+    <modal-edit/>
     <div v-if="spinner"  style="height: 100%;align-items: center;display: flex;justify-content: center;flex-direction: column;">
       <q-spinner-oval color="indigo" size="10em" class="q-mb-md"/>
 
@@ -47,11 +48,16 @@ import ToDoApp from "../components/to-do/DashBoard.vue";
 import ModalForm from "src/components/to-do/ModalForm.vue";
 import ToDoAppMobile from "src/components/to-do/mobile/IndexPage.vue";
 import { useDataTodosStore } from "../stores/todos";
+import ModalEdit from "src/components/to-do/ModalEdit.vue";
 
 const spinner = ref(true)
 
 const modal = ref(false);
 provide("modal", modal);
+const modalEdit = ref(false)
+provide('modal-edit', modalEdit)
+const todoCurrent = ref('')
+provide('todo-current', todoCurrent)
 // Store
 const storeTodos = useDataTodosStore();
 

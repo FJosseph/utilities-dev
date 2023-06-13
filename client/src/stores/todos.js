@@ -102,6 +102,15 @@ export const useDataTodosStore = defineStore("todos", {
         console.log(error);
       }
     },
+    async updateTodoData(id, data){
+      try {
+        const response = await axios.put(`${VUE_TODO}/todo/${id}`, data)
+        console.log(response.data);
+        this.setAll()
+      } catch (error) {
+        console.log(error);
+      }
+    },
     async deleteTodo(id) {
       //! <--- Example without api and database
       if(!isAuthtenticated.value){
