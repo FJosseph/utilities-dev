@@ -20,7 +20,7 @@
         @click="modal = true"
         :size="$q.screen.lt.sm?'md':''"
       />
-      <div v-if="!$q.screen.lt.sm && !$q.screen.lt.md && !$q.screen.lg" class="container-d-todo q-mt-md">
+      <div v-if="!$q.screen.lt.sm && !$q.screen.lt.md && !$q.screen.lt.lg" class="container-d-todo q-mt-md">
         <div class="row q-gutter-sm q-px-md q-pt-md">
           <ToDoApp  :allData="allTodosByColumns" />
           <!-- <ToDoApp v-if="!$q.screen.lt.sm" :allData="allTodosByColumnsMOCK" /> -->

@@ -124,7 +124,7 @@ const todoFilter = computed(() =>
 // Manejo de input
 watchEffect(() => {
   console.log(todoFilter.value);
-  if(todoCurrent.value){
+  if(todoCurrent.value && modal.value){
       const { title, color, text } = todoFilter.value;
       input.value = {
         title,
@@ -148,6 +148,7 @@ const submit = () => {
   //   storeTodos.addTodo(input.value);
   storeTodos.updateTodoData(todoCurrent.value, input.value)
   modal.value = false;
+  todoCurrent.value = ''
 };
 </script>
 <style>

@@ -17,14 +17,23 @@
   <div class="text-h4 text-weight-regular">
     {{ text }}
   </div>
+  <q-btn @click="todoDelete(id)" round unelevated dense icon="delete" size="18px"  style="position: absolute;left: 13.3em;bottom: 10px;">
+  </q-btn>
   </div>
 </template>
 <script setup>
 import { inject } from "vue";
+import { useDataTodosStore } from "../../stores/todos";
+
+// Stores
+const storeTodo = useDataTodosStore()
 
 const onDragStart = inject("drag-start");
 
 const modalEdit = inject('modal-edit')
+const todoDelete = (id)=>{
+  storeTodo.deleteTodo(id)
+}
 const todoCurrent = inject('todo-current')
 defineProps({
   id: { type: String },

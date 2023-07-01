@@ -103,6 +103,14 @@ export const useDataTodosStore = defineStore("todos", {
       }
     },
     async updateTodoData(id, data){
+      if(!isAuthtenticated.value){
+        console.log(id, data);
+        const todoFilter = this.todo.findIndex(x=>x.id === id)
+        this.todo[todoFilter] = {...this.todo[todoFilter], ...data}
+        window.localStorage.setItem('todos', JSON.stringify(this.todo))
+        this.setAll()
+        return
+      }
       try {
         const response = await axios.put(`${VUE_TODO}/todo/${id}`, data)
         console.log(response.data);
